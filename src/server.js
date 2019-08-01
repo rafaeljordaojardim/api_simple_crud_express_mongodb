@@ -1,3 +1,13 @@
+/*
+    ================ FICOU FALTANDO ==============
+    * Validações das informações (Email - Telefone)
+    * Organização do projeto
+    * Tratamento de erros
+    * Implementação de IDs sequenciais
+    * Refatoração para melhoria e entendimento do código
+    * Uso de async await nas requisições para o banco
+*/
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express()
@@ -15,9 +25,11 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.post('/clientes', (req, res) => {
     const cliente = colocarDadosClienteInsert(req, res)
     // res.send(cliente.nome)
-    cliente.save(() => {
-        res.json({mensagem:`Cliente ${cliente.nome} cadastrado com sucesso`})
-     })
+    if(cliente.nome){
+        cliente.save(() => {
+            res.json({mensagem:`Cliente ${cliente.nome} cadastrado com sucesso`})
+         })
+    } 
 })
 
 //Tras todos os clientes
